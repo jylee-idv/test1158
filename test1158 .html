@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>아이디벨 이제연 요세푸스 문제</title>
+</head>
+<body>
+  <input type="number" id="n" placeholder="N을 입력해주세요">
+  <input type="number" id="k" placeholder="K를 입력해주세요">
+  <button onclick="start()">레츠기릿</button>
+
+  <p id="return_value">정답은 여기에 ㅎㅎ</p>
+
+
+  <script>
+    /*
+    백준 1158
+    요세푸스 문제는 다음과 같다.
+    1번부터 N번까지 N명의 사람이 원을 이루면서 앉아있고, 양의 정수 K(≤ N)가 주어진다. 
+    이제 순서대로 K번째 사람을 제거한다. 
+    한 사람이 제거되면 남은 사람들로 이루어진 원을 따라 이 과정을 계속해 나간다. 
+    이 과정은 N명의 사람이 모두 제거될 때까지 계속된다. 
+    원에서 사람들이 제거되는 순서를 (N, K)-요세푸스 순열이라고 한다. 
+    예를 들어 (7, 3)-요세푸스 순열은 <3, 6, 2, 7, 5, 1, 4>이다.
+    N과 K가 주어지면 (N, K)-요세푸스 순열을 구하는 프로그램을 작성하시오.
+    */
+
+    const start = () => {
+      const input_N = document.querySelector('#n').value
+      const input_K = document.querySelector('#k').value
+      if(input_N > 0 && input_K > 0) {
+        document.querySelector('#return_value').innerText = `[${solution(input_N, input_K)}]`
+      } else {
+        alert('값을 입력해주세요.')
+      }
+    }
+    const solution = (N, K) => {
+      const 살아있는사람 = []
+      const 죽은사람 = []
+      let 죽을순서 = 0
+      for(let i = 1; i <= N; i++){
+        살아있는사람.push(i)
+      }
+      for(let j = 0; j < N; j++){
+        죽을순서 += K - 1  
+        while(죽을순서 >= 살아있는사람.length){
+          죽을순서 -= 살아있는사람.length
+        }          
+        죽은사람.push(살아있는사람[죽을순서])
+        살아있는사람.splice(죽을순서, 1)
+        console.log(죽을순서, 살아있는사람, 죽은사람)
+      }
+      return 죽은사람
+    }
+  </script>
+</body>
+</html>
