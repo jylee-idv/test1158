@@ -31,7 +31,7 @@
       const input_N = document.querySelector('#n').value
       const input_K = document.querySelector('#k').value
       if(input_N > 0 && input_K > 0) {
-        document.querySelector('#return_value').innerText = `[${solution(input_N, input_K)}]`
+        document.querySelector('#return_value').innerText = solution(input_N, input_K)
       } else {
         alert('값을 입력해주세요.')
       }
@@ -52,7 +52,7 @@
         살아있는사람.splice(죽을순서, 1)
         console.log(죽을순서, 살아있는사람, 죽은사람)
       }
-      return 죽은사람
+      return `<${죽은사람}>`
     }
   </script>
 </body>
